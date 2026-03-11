@@ -32,7 +32,7 @@ Esto abrira una linea donde puedes escribir mensajes, en este caso enviar el sig
 {"orderId":"order-1234","customerId":"69b0df7ccfb808f94a8563b1","products":["69b0df7ccfb808f94a8563b4","69b0df7ccfb808f94a8563b5"]}
 ```
 ---
-El worker procesara este mensaje y hara su respectivo flujo de validaciones y registro de datos.
+Iniciar el worker en el IDE de su preferencia, asi procesara este mensaje y hara su respectivo flujo de validaciones y registro de datos.
 
 Ingresa a http://localhost:8081 es la interfaz grafica de mongodb para revisar las colecciones en la base de datos company, con las siguientes credenciales
 -   usuario: admin
