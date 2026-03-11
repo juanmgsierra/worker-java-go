@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/juanmgsierra/go-api/db"
 	"github.com/juanmgsierra/go-api/handlers"
+	"github.com/redis/go-redis/v9"
 )
 
 type Server struct {
@@ -12,10 +13,10 @@ type Server struct {
 	productHandler  *handlers.ProductHandler
 }
 
-func NewServer(collections *db.Collections) *Server {
+func NewServer(collections *db.Collections, redis *redis.Client) *Server {
 	server := &Server{
-		customerHandler: handlers.NewCustomerHandler(collections.Customers),
-		productHandler:  handlers.NewProductHandler(collections.Products),
+		customerHandler: handlers.NewCustomerHandler(collections.Customers, redis),
+		productHandler:  handlers.NewProductHandler(collections.Products, redis),
 	}
 
 	router := gin.Default()
