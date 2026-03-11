@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/juanmgsierra/go-api/api"
 	"github.com/juanmgsierra/go-api/db"
+	"github.com/redis/go-redis/v9"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
@@ -43,7 +44,13 @@ func main() {
 		Products:  database.Collection("products"),
 	}
 
-	server := api.NewServer(collections)
+	uriRdb := os.Getenv("REDIS_URI")
+	rdb := redis.NewClient(&redis.Options{
+		Addr: uriRdb,
+		DB:   0,
+	})
+
+	server := api.NewServer(collections, rdb)
 	serverAddress := os.Getenv("SERVER_ADDRESS")
 	err = server.Start(serverAddress)
 	if err != nil {
