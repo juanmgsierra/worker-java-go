@@ -82,6 +82,21 @@ services:
       - kafka
     networks:
       - broker-kafka
+  
+  go-api:
+    build:
+      context: ./go-api
+      dockerfile: Dockerfile
+    container_name: go_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - redis
+    environment:
+      MONGODB_URI: mongodb://admin:jmgsTest@mongodb:27017/?authSource=admin
+      REDIS_URI: redis:6379
+      SERVER_ADDRESS: :8000
 
 volumes:
   mongo_data:

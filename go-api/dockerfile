@@ -12,6 +12,7 @@ FROM gcr.io/distroless/static-debian12
 ENV SERVER_ADDRESS=:8000
 ENV GIN_MODE=release
 ENV MONGODB_URI=""
+ENV REDIS_URI=""
 
 COPY --from=build /go/bin/app /
 EXPOSE 8000
